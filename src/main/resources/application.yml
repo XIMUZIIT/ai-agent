@@ -1,0 +1,19 @@
+server:
+  port: 9102
+
+spring:
+  application:
+    name: ai-agent          # 不用 @artifactId@，写死最稳
+  config:
+    import:
+      - optional:nacos:business.properties?group=SEATA_GROUP
+  cloud:
+    nacos:
+      server-addr: ${NACOS_HOST:192.168.99.102}:${NACOS_PORT:8848}
+      discovery:
+        group: SEATA_GROUP
+      config:
+        file-extension: properties
+        group: SEATA_GROUP
+        refresh-enabled: true
+        # username / password 服务端没开鉴权就别写

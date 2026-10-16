@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: enterprise-hybrid-agent
+  datasource:
+    url: jdbc:mysql://localhost:3306/bi_db?useSSL=false&serverTimezone=UTC
+    username: bi_readonly_user
+    password: ${DB_PASSWORD:safe_password_123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+
+agent:
+  llm:
+    api-key: ${OPENAI_API_KEY:sk-proj-demo-key-123456}
+    base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
+    model-name: gpt-4o
+    temperature: 0.1
+    timeout-seconds: 60
+    log-requests: true
+    log-responses: true
